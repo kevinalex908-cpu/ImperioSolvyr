@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imperio Solvyr</title>
+
+<style>
+
+.rango button{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    justify-content:center;
+}
+
+.rango button img{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+}
+
+.dorado{
+    color:#FFD700;
+    font-weight:bold;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:#111;
+    color:white;
+}
+
+/* MENU */
+nav{
+    position:sticky;
+    top:0;
+    background: linear-gradient(90deg, #000000, #1a1a1a);
+    padding:15px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    border-bottom:3px solid gold;
+    flex-wrap:wrap;
+    z-index:1000;
+}
+
+nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    font-weight:bold;
+    padding:10px 20px;
+    border-radius:8px;
+    position: relative;
+    transition:0.3s;
+}
+
+nav button:hover{
+    color:gold;
+    background: rgba(255,255,255,0.1);
+}
+
+nav button.active::after{
+    content:"";
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:100%;
+    height:4px;
+    background:gold;
+    border-radius:4px;
+}
+
+/* SECCIONES */
+.seccion{
+    display:none;
+    padding:30px;
+    animation: fade 0.4s ease;
+}
+
+.seccion.activa{
+    display:block;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* TITULOS */
+h1{
+    text-align:center;
+    color:gold;
+    margin-bottom:30px;
+}
+
+h2{
+    text-align:center;
+    color:orange;
+}
+
+/* RANGOS */
+.rango{
+    margin:15px 0;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.rango button{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    border:none;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+}
+
+.contenido{
+    display:none;
+    padding:10px;
+    background:#1a1a1a;
+}
+
+.cargo{
+    padding:8px;
+    border-bottom:1px solid #333;
+}
+
+/* COLORES */
+.iniciados button{ background:#2e7d32; }
+.guardianes button{ background:#1565c0; }
+.caballeros button{ background:#8d6e00; }
+.consejo button{ background:#b71c1c; }
+.solares button{ background:#f9a825; }
+
+/* HORARIOS */
+.submenu{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.submenu button{
+    padding:10px 20px;
+    margin:10px;
+    background:gold;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:6px;
+}
+
+.horario-contenido{
+    display:none;
+    text-align:center;
+    font-size:18px;
+    line-height:2;
+}
+
+/* NORMATIVAS */
+.reglas{
+    max-width:900px;
+    margin:0 auto;
+    font-size:18px;
+    line-height:2;
+}
+
+/* MEMBRESIAS */
+.membresia-card{
+    background:#1a1a1a;
+    border:2px solid gold;
+    border-radius:8px;
+    padding:20px;
+    margin:20px auto;
+    max-width:600px;
+    text-align:center;
+}
+
+.guardapaga{ border-color:#2e7d32; color:#2e7d32; }
+.ltv{ border-color:#1565c0; color:#1565c0; }
+.cargos-afk{ border-color:#ff9800; color:#ff9800; }
+
+/* NOTICIAS */
+.noticias{
+    max-width:900px;
+    margin:0 auto;
+    padding:20px;
+    background:#1a1a1a;
+    border:2px solid gold;
+    border-radius:8px;
+}
+</style>
+
+<script>
+function mostrarSeccion(id){
+    document.querySelectorAll(".seccion").forEach(sec=>{
+        sec.classList.remove("activa");
+    });
+
+    document.getElementById(id).classList.add("activa");
+
+    document.querySelectorAll("nav button").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    event.target.classList.add("active");
+}
+
+function toggle(id){
+    const contenido = document.getElementById(id);
+    contenido.style.display =
+        contenido.style.display === "block" ? "none" : "block";
+}
+
+function mostrarHorario(id){
+    document.querySelectorAll(".horario-contenido").forEach(sec=>{
+        sec.style.display="none";
+    });
+    document.getElementById(id).style.display="block";
+}
+</script>
+
+</head>
+<body>
+
+<nav>
+    <button class="active" onclick="mostrarSeccion('inicio')">Inicio</button>
+    <button onclick="mostrarSeccion('rangos')">Rangos</button>
+    <button onclick="mostrarSeccion('horarios')">Horarios</button>
+    <button onclick="mostrarSeccion('normativas')">Normativas</button>
+    <button onclick="mostrarSeccion('membresias')">Membresías</button>
+    <button onclick="mostrarSeccion('noticias')">Noticias</button>
+</nav>
+
+<div id="inicio" class="seccion activa">
+    <h1>Bienvenidos al Imperio Solvyr</h1>
+
+    <div style="text-align:center; margin-top:30px;">
+        <img src="sol2.png" alt="Imperio Solvyr"
+             style="max-width:110%; width:1080px; border-radius:12px; box-shadow:0 6px 25px rgba(255,215,0,0.3);">
+    </div>
+</div>
+
+
+<!-- RANGOS -->
+<div id="rangos" class="seccion">
+    <h1>Sistema Oficial de Rangos</h1>
+
+    <!-- INICIADOS -->
+    <div class="rango iniciados">
+       <button onclick="toggle('r1')">
+    <img src="iniciado.png">
+    Iniciados | 💰 22 paga semanal
+</button>
+
+        <div class="contenido" id="r1">
+           <center> <div class="cargo">#1 Llama Naciente - <span class="dorado">40 créditos</span></div>
+            <div class="cargo">#2 Centella del Alba -<span class="dorado"> 50 créditos</span></div>
+            <div class="cargo">#3 Discípulo Solar -<span class="dorado"> 60 créditos</span></div>
+            <div class="cargo">#4 Adepto de la Luz - <span class="dorado">70 créditos</span></div>
+            <div class="cargo">#5 Guardián en Entrenamiento -<span class="dorado"> 80 créditos</span></div>
+            <div class="cargo">#6 Servidor del Sol -<span class="dorado"> 90 créditos</span></div>
+            <div class="cargo">#7 Portador del Juramento - <span class="dorado">100 créditos</span></div>
+            <div class="cargo">#8 Fiel de la Aurora -<span class="dorado"> 110 créditos</span></div>
+            <div class="cargo">#9 Heraldo de Fuego - <span class="dorado">120 créditos</span></div>
+            <div class="cargo">#10 Ascendido a Guardián - <span class="dorado">130 créditos</span></div></center>
+        </div>
+
+
+
+    </div>
+
+    <!-- GUARDIANES -->
+    <div class="rango guardianes">
+<button onclick="toggle('r2')">
+    <img src="guardian.png">
+    Guardianes Ígneos | 💰 34 paga semanal
+</button>
+
+        <div class="contenido" id="r2">
+           <center> <div class="cargo">#11 Centella Novicia -<span class="dorado"> 150 créditos</span></div>
+            <div class="cargo">#12 Centinela del Alba - <span class="dorado">170 créditos</span></div>
+            <div class="cargo">#13 Guardia de Fuego - <span class="dorado">190 créditos</span></div>
+            <div class="cargo">#14 Vigía Solar - <span class="dorado">210 créditos</span></div>
+            <div class="cargo">#15 Protector del Trono - <span class="dorado">230 créditos</span></div>
+            <div class="cargo">#16 Centurión de Fuego - <span class="dorado">250 créditos</span></div>
+            <div class="cargo">#17 Pilar del Sol -<span class="dorado"> 270 créditos</span></div>
+            <div class="cargo">#18 Capitán de la Guardia Dorada -<span class="dorado"> 290 créditos</span></div>
+            <div class="cargo">#19 Comandante de Fuegos S. - <span class="dorado">310 créditos</span></div>
+            <div class="cargo">#20 Alto Guardián de Solyr - <span class="dorado">330 créditos</span></div></center>
+        </div>
+    </div>
+
+    <!-- CABALLEROS -->
+    <div class="rango caballeros">
+<button onclick="toggle('r3')">
+    <img src="caballeros.png">
+    Caballeros Aurores | 💰 48 paga semanal
+</button>
+       
+        <div class="contenido" id="r3">
+          <center>  <div class="cargo">#21 Caballero Solar - <span class="dorado">370 créditos</span></div>
+            <div class="cargo">#22 Escudero de la Aurora -<span class="dorado"> 410 créditos</span></div>
+            <div class="cargo">#23 Caballero de la Llama - <span class="dorado">450 créditos</span></div>
+            <div class="cargo">#24 Paladín del Sol -<span class="dorado"> 490 créditos</span></div>
+            <div class="cargo">#25 Centurión Dorado - <span class="dorado">530 créditos</span></div>
+            <div class="cargo">#26 Capitán de la Aurora - <span class="dorado">570 créditos</span></div>
+            <div class="cargo">#27 Maestro de Espadas - <span class="dorado">610 créditos</span></div>
+            <div class="cargo">#28 Comandante Solar -<span class="dorado"> 650 créditos</span></div>
+            <div class="cargo">#29 Mariscal del Fuego - <span class="dorado">690 créditos</span></div>
+            <div class="cargo">#30 Gran General de la Luz - <span class="dorado">730 créditos</span></div></center>
+        </div>
+    </div>
+
+    <!-- CONSEJO -->
+    <div class="rango consejo">
+<button onclick="toggle('r4')">
+    <img src="consejero.png">
+    Consejo de la Llama | 💰 72 paga semanal
+</button>
+        
+        <div class="contenido" id="r4">
+           <center> <div class="cargo">#31 Iniciado del Consejo - 810 créditos</span></div>
+            <div class="cargo">#32 Observador del Fuego -<span class="dorado"> 890 créditos</span></div>
+            <div class="cargo">#33 Portador de la Llama - <span class="dorado">970 créditos</span></div>
+            <div class="cargo">#34 Sabio de la Aurora - <span class="dorado">1050 créditos</span></div>
+            <div class="cargo">#35 Custodio del Sol Dorado -<span class="dorado"> 1130 créditos</span></div>
+            <div class="cargo">#36 Guardián del Códice Solar -<span class="dorado"> 1210 créditos</span></div>
+            <div class="cargo">#37 Vidente de la Llama Eterna -<span class="dorado"> 1290 créditos</span></div>
+            <div class="cargo">#38 Alto Consejero del Fuego - <span class="dorado">1370 créditos</span></div>
+            <div class="cargo">#39 Archimago del Sol -<span class="dorado"> 1450 créditos</span></div>
+            <div class="cargo">#40 Gran Sabio de Solyr -<span class="dorado"> 1530 créditos</span></div></center>
+        </div>
+    </div>
+
+    <!-- SOLARES -->
+    <div class="rango solares">
+<button onclick="toggle('r5')">
+    <img src="solares.png">
+    Solares | 💰 100 paga semanal
+</button>
+        
+        <div class="contenido" id="r5">
+            <center><div class="cargo">#41 Sombra del Emperador -<span class="dorado"> 1690 créditos</span></div>
+            <div class="cargo">#42 Voz del Fuego Divino - <span class="dorado">1850 créditos</span></div>
+            <div class="cargo">#43 Guardián del Trono del Sol - <span class="dorado">2010 créditos</span></div>
+            <div class="cargo">#44 Portador de Llama Primigenia - <span class="dorado">2170 créditos</span></div>
+            <div class="cargo">#45 Señor del Cetro Solar - <span class="dorado">2330 créditos</span></div>
+            <div class="cargo">#46 Custodio de la Luz Eterna -<span class="dorado"> 2490 créditos</span></div>
+            <div class="cargo">#47 Heredero Dorado de Solyr - <span class="dorado">2650 créditos</span></div>
+            <div class="cargo">#48 Heredero del Trono Carmesí - <span class="dorado">2810 créditos</span></div></center>
+        </div>
+    </div>
+
+</div>
+
+<!-- HORARIOS -->
+<div id="horarios" class="seccion">
+    <h1>Horarios Oficiales</h1>
+
+    <div class="submenu">
+        <button onclick="mostrarHorario('apertura')">Horario de Apertura</button>
+        <button onclick="mostrarHorario('paga')">Horario de Paga</button>
+    </div>
+
+    <div id="apertura" class="horario-contenido">
+        <h2>[SEDE PRINCIPAL] - NORUEGA</h2>
+        ECUADOR 13:00 PM<br>
+        COLOMBIA 13:00 PM<br>
+        PERU 13:00 PM<br>
+        PANAMA 13:00 PM<br>
+        ESPAÑA 19:00 PM<br>
+        VENEZUELA 14:00 PM<br>
+        BOLIVIA 14:00 PM<br>
+        CHILE 14:00 PM<br>
+        PARAGUAY 15:00 PM<br>
+        ARGENTINA 15:00 PM<br>
+        URUGUAY 15:00 PM<br>
+        REPUBLICA DOMINICANA 14:00 PM<br>
+        EL SALVADOR 12:00 PM<br>
+        MEXICO 12:00 PM
+    </div>
+
+    <div id="paga" class="horario-contenido">
+        <h2>Horarios - Cierre / Paga</h2>
+        <h2>[SEDE PRINCIPAL] - NORUEGA</h2>
+        ECUADOR 18:00 PM<br>
+        COLOMBIA 18:00 PM<br>
+        PERU 18:00 PM<br>
+        PANAMA 18:00 PM<br>
+        ESPAÑA 00:00 PM<br>
+        VENEZUELA 19:00 PM<br>
+        BOLIVIA 19:00 PM<br>
+        CHILE 19:00 PM<br>
+        PARAGUAY 20:00 PM<br>
+        ARGENTINA 20:00 PM<br>
+        URUGUAY 20:00 PM<br>
+        REPUBLICA DOMINICANA 19:00 PM<br>
+        EL SALVADOR 17:00 PM<br>
+        MEXICO 17:00 PM
+    </div>
+</div>
+
+<!-- NORMATIVAS -->
+<div id="normativas" class="seccion">
+    <h1>Normativas Oficiales</h1>
+    <div class="reglas">
+        <ol>
+            <li>No hacer spam de ningún tipo.</li>
+            <li>No insultar a usuarios u oficiales.</li>
+            <li>Usar los canales adecuadamente.</li>
+            <li>No compartir material ofensivo extremo.</li>
+            <li>No hablar ni promocionar otros gremios.</li>
+            <li>No abusar de bots.</li>
+            <li>Prohibido el uso de multicuentas.</li>
+            <li>Respetar a todos los miembros.</li>
+            <li>No abusar de rangos ni privilegios.</li>
+            <li>Cumplir horarios establecidos.</li>
+            <li>No generar conflictos internos.</li>
+            <li>Obedecer órdenes superiores.</li>
+            <li>Prohibido el uso de exploits.</li>
+            <li>Faltas graves pueden resultar en expulsión.</li>
+            <li>Mantener conducta profesional.</li>
+        </ol>
+    </div>
+</div>
+
+<!-- MEMBRESIAS -->
+<div id="membresias" class="seccion">
+<h1>Membresías Oficiales</h1>
+
+<div class="membresia-card guardapaga">
+<button onclick="toggle('r1')">
+    <img src="guarda.png">
+</button>
+<h3>Membresía Guardapaga 💰</h3>
+<p>💸 Costo: 25$</p>
+<p>⏳ Duración: 1 Mes</p>
+<p>✅ Guarda tu paga por 72 horas.</p>
+<p>⚠️ Exclusiva para reclutadores</p>
+</div>
+
+<div class="membresia-card ltv">
+<button onclick="toggle('r1')">
+    <img src="ltv.png">
+</button>
+<h3>Membresía LTV 🔥</h3>
+<p>💸 Costo: 75$</p>
+<p>⏳ Duración: 1 Mes</p>
+<p>✅ 2 horas adicionales.</p>
+<p>✅ Mejora de paga progresiva.</p>
+<p>✅ Ropa libre.</p>
+<p>✅ Paga inmediata.</p>
+<p>⚠️ Exclusiva para reclutas</p>
+</div>
+
+<div class="membresia-card cargos-afk">
+<button onclick="toggle('r1')">
+    <img src="afk.png">
+</button>
+<h3>Membresía Cargos AFK 😴</h3>
+<p>💸 Costo: 70$</p>
+<p>⏳ Duración: 1 Mes</p>
+<p>✅ Recibes paga sin cumplir requisitos mínimos.</p>
+<p>⚠️ Exclusiva para cargos</p>
+</div>
+
+</div>
+
+<!-- NOTICIAS -->
+<div id="noticias" class="seccion">
+<h1>Noticias y Novedades</h1>
+<div class="noticias">
+<h3>Últimas noticias:</h3>
+<p>📰 Se abre nueva sede del Imperio Solvyr Dias Lunes y Martes</p>
+<p>📰 Nuevo Cargo Iniciado - LeyHabbo.</p>
+
+</div>
+</div>
+
+</body>
+</html>
